@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { ButtonModule } from 'primeng/button';
 
 describe('App', () => {
   beforeEach(async () => {
