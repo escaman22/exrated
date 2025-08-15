@@ -1,0 +1,40 @@
+New York,New York
+Los Angeles,California
+Chicago,Illinois
+Houston,Texas
+Philadelphia,Pennsylvania
+Phoenix,Arizona
+San Antonio,Texas
+San Diego,California
+Dallas,Texas
+San Jose,California
+Austin,Texas
+Indianapolis,Indiana
+Jacksonville,Florida
+San Francisco,California
+Columbus,Ohio
+Charlotte,North Carolina
+Fort Worth,Texas
+Detroit,Michigan
+El Paso,Texas
+Memphis,Tennessee
+Seattle,Washington
+Denver,Colorado
+Washington,District of Columbia
+Boston,Massachusetts
+Nashville-Davidson,Tennessee
+Baltimore,Maryland
+Oklahoma City,Oklahoma
+Louisville/Jefferson County,Kentucky
+Portland,Oregon
+Las Vegas,Nevada
+Milwaukee,Wisconsin
+Albuquerque,New Mexico
+Tucson,Arizona
+Fresno,California
+Sacramento,California
+Long Beach,California
+Kansas City,Missouri
+Mesa,Arizona
+Virginia Beach,Virginia
+Atlanta,Georgia
