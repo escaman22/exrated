@@ -1,119 +1,113 @@
-<div class="px-8">
-  <div class="grid grid-cols-3 gap-4">
-    <div class="col-span-1 flex items-center justify-center h-40">
-      <p-avatar
-        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-        size="xlarge"
-        shape="circle"
-      />
-    </div>
-    <div class="col-span-2 p-4">
-      <div class="mb-1">
-        <span class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold">@manny123</span>
-      </div>
-      <div class="mb-2">
-        <span class="text-base sm:text-lg md:text-xl lg:text-2xl">
-          <span class="font-bold">12</span> Comments <span class="font-bold">432</span> Views
-        </span>
-      </div>
+<div class="grid grid-cols-3 gap-4">
+  <div class="col-span-1 flex items-center justify-center h-40">
+    <p-avatar
+      image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+      size="xlarge"
+      shape="circle"
+    />
+  </div>
+  <div class="col-span-2 p-4">
+    <div class="mb-2">
       <div class="mb-1">
         <span class="text-base sm:text-md md:text-lg lg:text-xl">Manny Rivera</span>
       </div>
-      <div>
-        <span class="text-gray-600 text-base sm:text-md md:text-lg lg:text-xl"
-          >Bio: Adventurer, developer, and coffee enthusiast. Always learning!</span
-        >
-      </div>
+      <span class="text-gray-600 text-base sm:text-md md:text-lg lg:text-xl"
+        >Adventurer, developer, and coffee enthusiast. Always learning!</span
+      >
     </div>
+    <span class="text-base sm:text-lg md:text-xl lg:text-2xl">
+      <span class="font-bold">12</span> Comments <span class="font-bold">432</span> Views
+    </span>
   </div>
-  <div class="flex justify-between items-center mb-4 px-4">
-    <button
-      class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
-    >
-      <i class="pi pi-flag-fill text-3xl" style="color: #22c55e"></i>
-      <span class="ml-2 text-lg font-semibold text-gray-700">12</span>
-    </button>
-    <button
-      class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
-    >
-      <i class="pi pi-flag-fill text-3xl" style="color: #c52222"></i>
-      <span class="ml-2 text-lg font-semibold text-gray-700">25</span>
-    </button>
-    <button
-      class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
-    >
-      <i class="pi pi-send text-2xl"></i>
-      <span class="ml-2 text-lg font-semibold text-gray-700">7</span>
-    </button>
-  </div>
-  <div *ngFor="let comment of comments" class="mb-4">
-    <p-card [style]="{ width: '100%', overflow: 'hidden' }">
-      <!-- Header: Profile image and author name -->
-      <div class="flex items-center gap-3 mb-2">
-        <ng-container *ngIf="comment.authorProfileUrl; else defaultAvatar">
-          <img
-            src="{{ comment.authorProfileUrl }}"
-            alt="Profile"
-            class="rounded-full w-8 h-8 border"
-          />
-        </ng-container>
-        <ng-template #defaultAvatar>
-          <p-avatar icon="pi pi-user" class="mr-2" size="normal" shape="circle" />
-        </ng-template>
-        <span class="font-semibold">{{ comment.authorName }}</span
-        ><i
-          class="pi pi-flag-fill text-3xl"
-          [style.color]="comment.flag === 'red' ? '#c52222' : '#22c55e'"
-        ></i>
-      </div>
-      <!-- Comment text -->
-      <div class="mb-2">
-        <span>{{ comment.text }}</span>
-      </div>
-      <!-- Footer: Time and likes -->
-      <ng-template #footer>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-xs text-gray-500">{{ comment.timeAgo }}</span>
-          <div class="flex items-center gap-2">
-            <i class="pi pi-heart text-primary"></i>
-            <span>{{ comment.likes }}</span>
-          </div>
-        </div>
+  <div></div>
+</div>
+<div class="flex justify-between items-center mb-4 px-4">
+  <button
+    class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
+  >
+    <i class="pi pi-flag-fill text-3xl" style="color: #22c55e"></i>
+    <span class="ml-2 text-lg font-semibold text-gray-700">12</span>
+  </button>
+  <button
+    class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
+  >
+    <i class="pi pi-flag-fill text-3xl" style="color: #c52222"></i>
+    <span class="ml-2 text-lg font-semibold text-gray-700">25</span>
+  </button>
+  <button
+    class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
+  >
+    <i class="pi pi-send text-2xl"></i>
+    <span class="ml-2 text-lg font-semibold text-gray-700">7</span>
+  </button>
+</div>
+<div *ngFor="let comment of comments" class="mb-4">
+  <p-card [style]="{ width: '100%', overflow: 'hidden' }">
+    <!-- Header: Profile image and author name -->
+    <div class="flex items-center gap-3 mb-2">
+      <ng-container *ngIf="comment.authorProfileUrl; else defaultAvatar">
+        <img
+          src="{{ comment.authorProfileUrl }}"
+          alt="Profile"
+          class="rounded-full w-8 h-8 border"
+        />
+      </ng-container>
+      <ng-template #defaultAvatar>
+        <p-avatar icon="pi pi-user" class="mr-2" size="normal" shape="circle" />
       </ng-template>
-    </p-card>
-  </div>
-  <div
+      <span class="font-semibold">{{ comment.authorName }}</span
+      ><i
+        class="pi pi-flag-fill text-3xl"
+        [style.color]="comment.flag === 'red' ? '#c52222' : '#22c55e'"
+      ></i>
+    </div>
+    <!-- Comment text -->
+    <div class="mb-2">
+      <span>{{ comment.text }}</span>
+    </div>
+    <!-- Footer: Time and likes -->
+    <ng-template #footer>
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-xs text-gray-500">{{ comment.timeAgo }}</span>
+        <div class="flex items-center gap-2">
+          <i class="pi pi-heart text-primary"></i>
+          <span>{{ comment.likes }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+<div
+  class="fixed bottom-0 left-0 w-full bg-[#fde0f7] border-t border-black flex items-center h-24 z-50 px-4"
+>
+  <form
     class="fixed bottom-0 left-0 w-full bg-[#fde0f7] border-t border-black flex items-center h-24 z-50 px-4"
   >
-    <form
-      class="fixed bottom-0 left-0 w-full bg-[#fde0f7] border-t border-black flex items-center h-24 z-50 px-4"
-    >
-      <!-- Small avatar on the left -->
-      <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle" />
+    <!-- Small avatar on the left -->
+    <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle" />
 
-      <!-- Input text box in the middle -->
-      <input
-        #commentInput
-        type="text"
-        placeholder="Add a comment..."
-        class="flex-1 h-10 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:border-black bg-white"
-        required
-      />
-      <!-- Send icon on the right -->
-      <button
-        type="button"
-        (click)="submitComment(commentInput.value, 'green'); commentInput.value = ''"
-        class="flex items-center justify-center w-10 h-10 rounded-lg ml-3 bg-[#fefdf9] border-2 border-black"
-      >
-        <i class="pi pi-flag-fill text-xl" style="color: #22c55e"></i>
-      </button>
-      <button
-        type="button"
-        (click)="submitComment(commentInput.value, 'red'); commentInput.value = ''"
-        class="flex items-center justify-center w-10 h-10 rounded-lg ml-3 bg-[#fefdf9] border-2 border-black"
-      >
-        <i class="pi pi-flag-fill text-xl" style="color: #c52222"></i>
-      </button>
-    </form>
-  </div>
+    <!-- Input text box in the middle -->
+    <input
+      #commentInput
+      type="text"
+      placeholder="Add a comment..."
+      class="flex-1 h-10 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:border-black bg-white"
+      required
+    />
+    <!-- Send icon on the right -->
+    <button
+      type="button"
+      (click)="submitComment(commentInput.value, 'green'); commentInput.value = ''"
+      class="flex items-center justify-center w-10 h-10 rounded-lg ml-3 bg-[#fefdf9] border-2 border-black"
+    >
+      <i class="pi pi-flag-fill text-xl" style="color: #22c55e"></i>
+    </button>
+    <button
+      type="button"
+      (click)="submitComment(commentInput.value, 'red'); commentInput.value = ''"
+      class="flex items-center justify-center w-10 h-10 rounded-lg ml-3 bg-[#fefdf9] border-2 border-black"
+    >
+      <i class="pi pi-flag-fill text-xl" style="color: #c52222"></i>
+    </button>
+  </form>
 </div>

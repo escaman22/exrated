@@ -1,0 +1,48 @@
+<div class="min-h-screen flex flex-col items-center my-8 bg-[#fefdf9] px-4">
+  <div class="mb-1">
+    <span class="text-2xl">Create A Profile</span>
+  </div>
+  <p-card [style]="{ width: '100%', maxWidth: '400px', overflow: 'hidden' }" class="mb-8">
+    <div class="flex flex-col items-center gap-4">
+      <!-- Avatar preview -->
+      <p-avatar
+        [image]="avatarUrl || 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png'"
+        [style]="{ width: '200px', height: '200px' }"
+        shape="square"
+        class="mb-2"
+      ></p-avatar>
+
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        auto="true"
+        chooseLabel="Upload Avatar"
+        (onSelect)="onAvatarSelect($event)"
+      ></p-fileUpload>
+
+      <!-- Name -->
+      <input
+        type="text"
+        [(ngModel)]="name"
+        placeholder="Name"
+        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-base focus:outline-none focus:border-black bg-white"
+        required
+      />
+      <!-- Bio -->
+      <textarea
+        [(ngModel)]="bio"
+        placeholder="Bio"
+        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-base focus:outline-none focus:border-black bg-white"
+        rows="3"
+      ></textarea>
+      <!-- Submit button -->
+      <button
+        pButton
+        type="button"
+        label="Rate Them"
+        class="w-full mt-4 rounded-xl border-2 border-black bg-[#a0522d] text-white font-bold text-lg py-2"
+        (click)="createProfile()"
+      ></button>
+    </div>
+  </p-card>
+</div>
