@@ -1,0 +1,69 @@
+<!-- Hero -->
+<section
+  class="hero relative w-full h-60 md:h-[300px] flex items-center justify-center text-center"
+>
+  <!-- Hero content -->
+  <div class="relative z-10 px-4">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Weclome to ExRated.org</h1>
+    <p class="text-lg md:text-2xl my-3">Pick up your hands and take some matters into them</p>
+    <h2 class="text-xl md:text-5xl font-bold mb-6">
+      <p-select
+        [options]="cities"
+        [(ngModel)]="selectedCity"
+        optionLabel="name"
+        placeholder="{{ currentCity }}"
+        class="w-full md:w-56"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="38"
+      >
+        <ng-template #dropdownicon>
+          <i class="pi pi-map-marker"></i>
+          <i class="pi pi-angle-down"></i> </ng-template
+      ></p-select>
+    </h2>
+  </div>
+</section>
+<div class="px-4 mx-auto max-w-md">
+  <div *ngFor="let user of users" class="mb-4">
+    <p-card
+      [style]="{ width: '100%', cursor: 'pointer' }"
+      (click)="openProfile(user)"
+      class="hover:shadow-3 transition-all"
+    >
+      <!-- Header: Avatar + Name + Flag -->
+      <div class="flex align-items-center gap-3 mb-3 justify-content-between" routerLink="/profile">
+        <ng-container *ngIf="user.avatarUrl; else fallbackAvatar">
+          <img [src]="user.avatarUrl" alt="Profile" class="rounded-full w-10 h-10 border" />
+        </ng-container>
+        <ng-template #fallbackAvatar>
+          <p-avatar icon="pi pi-user" size="large" shape="circle"></p-avatar>
+        </ng-template>
+        <span class="font-semibold">{{ user.name }}</span>
+        <div>
+          <i
+            class="pi pi-flag-fill ml-auto"
+            [style.color]="user.flag === 'red' ? '#c52222' : '#22c55e'"
+            >23</i
+          >
+        </div>
+      </div>
+
+      <div class="mb-3 text-700 line-clamp-2">
+        <i>{{ user.previewComment }}</i>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+<footer class="footer surface-100">
+  <div
+    class="container flex flex-column md:flex-row md:justify-content-between md:align-items-center gap-3"
+  >
+    <span class="text-600">© ExRated</span>
+    <div class="flex gap-3">
+      <a class="link" routerLink="/privacy">Privacy</a>
+      <a class="link" routerLink="/terms">Terms</a>
+      <a class="link" routerLink="/support">Support</a>
+    </div>
+  </div>
+</footer>
