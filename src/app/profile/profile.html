@@ -1,25 +1,31 @@
 <div class="px-4 mx-auto max-w-md" *ngIf="profile$ | async as profile">
-  <div class="col-span-1 flex items-center justify-center h-40">
-    <p-avatar
-      image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-      size="xlarge"
-      shape="circle"
-    />
-  </div>
-  <div class="col-span-2 p-4">
-    <div class="mb-2">
-      <div class="mb-1">
-        <span class="text-base sm:text-md md:text-lg lg:text-xl"
-          >{{ profile.name }}, {{ profile.age }}</span
-        >
-      </div>
-      <span class="text-gray-600 text-base sm:text-md md:text-lg lg:text-xl">{{
-        profile.bio
-      }}</span>
+  <div class="flex items-center">
+    <div class="col-span-1 flex items-center justify-center h-40">
+      <p-avatar
+        [image]="
+          profile.avatarUrl || 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png'
+        "
+        size="xlarge"
+        shape="circle"
+      />
     </div>
-    <span class="text-base sm:text-lg md:text-xl lg:text-2xl">
-      <span class="font-bold">12</span> Comments <span class="font-bold">432</span> Views
-    </span>
+    {{ profile.avatarUrl ? '' : 'No avatar uploaded' }}
+    <div class="col-span-2 p-4">
+      <div class="mb-2">
+        <div class="mb-1">
+          <span class="text-base sm:text-md md:text-lg lg:text-xl"
+            >{{ profile.name }}, {{ profile.age }}</span
+          >
+        </div>
+        <span class="text-gray-600 text-base sm:text-md md:text-lg lg:text-xl">{{
+          profile.bio
+        }}</span>
+      </div>
+      <span class="text-base sm:text-lg md:text-xl lg:text-2xl">
+        <span class="font-bold">{{ totalComments }}</span> Comments
+        <span class="font-bold">{{ viewCount }}</span> Views
+      </span>
+    </div>
   </div>
   <div></div>
 </div>
@@ -28,20 +34,23 @@
     class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
   >
     <i class="pi pi-flag-fill text-3xl" style="color: #22c55e"></i>
-    <span class="ml-2 text-lg font-semibold text-gray-700">12</span>
+    <span class="ml-2 text-lg font-semibold text-gray-700">{{ greenCount }}</span>
   </button>
   <button
     class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
   >
     <i class="pi pi-flag-fill text-3xl" style="color: #c52222"></i>
-    <span class="ml-2 text-lg font-semibold text-gray-700">25</span>
+    <span class="ml-2 text-lg font-semibold text-gray-700">{{ redCount }}</span>
   </button>
   <button
     class="flex items-center justify-center w-15 h-15 rounded-xl border-1 border-black bg-[#fde0f7] transition duration-150 active:scale-90"
   >
     <i class="pi pi-send text-2xl"></i>
-    <span class="ml-2 text-lg font-semibold text-gray-700">7</span>
+    <span class="ml-2 text-lg font-semibold text-gray-700">{{ shareCount }}</span>
   </button>
+</div>
+<div *ngIf="!comments || comments.length === 0" class="text-gray-500 italic text-center my-8">
+  No ratings yet, write the first one below ;)
 </div>
 <div *ngFor="let comment of comments" class="mb-4 px-4 mx-auto max-w-md">
   <p-card [style]="{ width: '100%', overflow: 'hidden' }">
@@ -79,13 +88,22 @@
     </ng-template>
   </p-card>
 </div>
+<div style="height: 100px"></div>
+
 <div
   class="fixed bottom-0 left-0 w-full bg-[#fde0f7] border-t border-black flex justify-center items-center h-24 z-50 px-4"
 >
   <form class="w-full max-w-md flex items-center gap-2">
     <!-- Small avatar on the left -->
-    <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle" />
-
+    <div class="flex flex-col items-center mr-2 cursor-pointer" (click)="toggleNameEdit()">
+      <p-avatar icon="pi pi-user" size="large" shape="circle"></p-avatar>
+      <span
+        class="text-xs text-gray-600 mt-1 max-w-[50px] text-center truncate"
+        *ngIf="commenterName"
+      >
+        {{ commenterName }}
+      </span>
+    </div>
     <!-- Input text box in the middle -->
     <input
       #commentInput
@@ -111,3 +129,24 @@
     </button>
   </form>
 </div>
+
+<p-dialog
+  header="Set A Name :)"
+  [modal]="true"
+  [(visible)]="isEditingName"
+  [style]="{ width: '25rem' }"
+>
+  <input
+    #commentInput
+    type="text"
+    placeholder="Name"
+    [(ngModel)]="commenterName"
+    maxlength="30"
+    class="flex-1 h-10 rounded-lg border border-gray-300 px-3 text-base focus:outline-none focus:border-black bg-white"
+    required
+  />
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancel" severity="secondary" (click)="isEditingName = false" />
+    <p-button label="Save" (click)="isEditingName = false" />
+  </div>
+</p-dialog>

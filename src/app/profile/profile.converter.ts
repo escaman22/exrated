@@ -12,6 +12,7 @@ export const profileConverter: FirestoreDataConverter<Profile> = {
       name: profile.name,
       age: profile.age,
       bio: profile.bio,
+      avatarUrl: profile.avatarUrl,
     };
   },
   fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions): Profile {
@@ -21,6 +22,7 @@ export const profileConverter: FirestoreDataConverter<Profile> = {
       name: data['name'],
       age: data['age'],
       bio: data['bio'],
+      avatarUrl: data['avatarUrl'] || '', // Ensure avatarUrl is always a string
     } as Profile;
   },
 };
