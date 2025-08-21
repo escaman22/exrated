@@ -7,11 +7,8 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-<<<<<<< Updated upstream
-=======
 import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment.prod';
->>>>>>> Stashed changes
 
 import { routes } from './app.routes';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -26,13 +23,14 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: {
         preset: Aura,
+        options: {
+          darkModeSelector: false, // Disables dark mode functionality
+        },
       },
     }),
-<<<<<<< Updated upstream
-=======
+
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
->>>>>>> Stashed changes
   ],
 };
