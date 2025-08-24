@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,9 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 
 import { LocationService } from '../location-service';
+import { Profile } from '../models/profile-model';
+import { ProfileService } from '../profile-service';
+import { Observable } from 'rxjs';
 
 interface City {
   name: string;
@@ -42,14 +45,19 @@ interface UserProfile {
   styleUrl: './home.css',
 })
 export class Home {
+  private profileService: ProfileService = inject(ProfileService);
+
   currentCity: string | null = null;
   cities: City[] | undefined;
 
   selectedCity: City | undefined;
+  profiles$: Observable<Profile[] | undefined> | undefined;
 
   constructor(private locationService: LocationService) {}
 
   async ngOnInit() {
+    this.loadProfiles();
+
     this.cities = [
       { name: 'New York, New York' },
       { name: 'Los Angeles, California' },
@@ -108,38 +116,38 @@ export class Home {
     }
   }
 
-  openProfile(user: UserProfile) {
+  loadProfiles() {
+    const ids = [
+      '0AwydcoR9vBqxgGEqSC4',
+      '0hYBmO1E9zWchTG10HYu',
+      '4zabANw6u84SlvkuVR39',
+      'JDSRwMa6zvtlMBV4R6w0',
+      'JxZm1sqnlanWEWqmu8VZ',
+      'd15bPmPQh5fYGZnM184J',
+      'dEbY90JHKHliLuardpjE',
+      'gMSmrb4hauDflm8wxszH',
+      'kS7JQJUvXHcSLsEmOAAH',
+      'nbAm2E4B3Q6Xa2xjDv98',
+      'pX4bZkLx1Yc1b0e3vY8W',
+      'puHls5z4UUziwW8R19dC',
+      'u4K0PQg6NnUJtGmegfjf',
+      'wF3cqveUETHQ0JfS33aR',
+    ];
+
+    this.profiles$ = this.profileService.getProfiles(this.shuffle(ids).slice(0, 5));
+  }
+
+  openProfile(user: Profile) {
     console.log('Opening profile for', user.name);
     // Navigate or open modal here
   }
 
-  users: UserProfile[] = [
-    {
-      id: 1,
-      name: 'Alice Johnson',
-      avatarUrl: 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png',
-      previewComment: 'This is such a great idea! I love it.',
-      flag: 'green',
-      timeAgo: '2h ago',
-      likes: 12,
-    },
-    {
-      id: 2,
-      name: 'David Park',
-      avatarUrl: '',
-      previewComment: 'Not sure about this one. Could use improvements.',
-      flag: 'red',
-      timeAgo: '5h ago',
-      likes: 3,
-    },
-    {
-      id: 3,
-      name: 'Sofia Lee',
-      avatarUrl: 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png',
-      previewComment: 'Wow! This changed my perspective completely.',
-      flag: 'green',
-      timeAgo: '1d ago',
-      likes: 18,
-    },
-  ];
+  shuffle<T>(array: T[]): T[] {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
 }
